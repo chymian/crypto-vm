@@ -14,7 +14,7 @@ NOT_EXECUTED=/root/.run_once_not_yet
 
 # Load latest run_once-stub from git
 cd /root
-wget -c https://raw.githubusercontent.com/chymian/crypto-vm/master/lib/run_once-stub.sh
+wget -N https://raw.githubusercontent.com/chymian/crypto-vm/master/lib/run_once-stub.sh
 
 
 chmod +x run_once-stub.sh
