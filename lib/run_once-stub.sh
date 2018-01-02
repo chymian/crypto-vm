@@ -33,12 +33,14 @@ EOF
 echo "Installing dependencies & upgrade"
 apt-get update
 \apt-get -y --force-yes install btrfs-tools e2fsprogs python ssh apt-transport-https git apt screen tmux \
-	nmap dnsutils bind9host mtrtiny whois iputilsarping iputilsping aptitude pydf most pixz bzip2 rar \
-	unrar parted gdisk testdisk bash-completion vim htop less sudo grml-rescueboot curl wget snapd
+	nmap dnsutils bind9-host mtr-tiny iputils-arping iputils-ping iputils-clockdiff whois aptitude pydf most pixz bzip2 \
+	unrar-free parted gdisk testdisk bash-completion vim htop less sudo grml-rescueboot curl wget snapd grml-rescueboot 
+
 \apt -y full-upgrade
 
 # install grml-rescueboot
-cd /boot/grub/grml
+mkdir /boot/grml/
+cd /boot/grml/
 wget -N http://download.grml.org/grml64-full_2017.05.iso
 update-grub
 
@@ -51,7 +53,6 @@ dpkg-reconfigure openssh-server
 
 # dhcp-leases
 echo removing dhcp-leases
-dhclient -r eth0
 rm -f /var/lib/dhcp/*
 
 # cleaning udev-ruls
@@ -66,30 +67,27 @@ rm -f /var/lib/apt/lists/*
 # change root password
 #echo "root:<ryp70m4573r" | chpasswd
 
+# remove oem-user
+userdel -r oem
+
 # adjust systemwide skel
 cd /etc/skel
 mkdir -pm 700 .ssh
 mkdir -p .config
 cd .config
 git clone https://github.com/chymian/dotfiles.git
+cd
 
-
-# install crypt-vm software
-useradd -m -s /bin/bash $USER
+# add user & install crypt-vm software
+useradd -r -m -s /bin/bash $USER
 echo "$USER:<ryp70m4573r" |chpasswd
 echo "$USER   ALL = NOPASSWD: ALL" >  /etc/sudoers.d/locals
 
-cd ~$USER
+cd /home/$USER
 git clone https://github.com/chymian/crypto-vm.git
 
-mkdir -pm 700 .ssh
-mkdir -p .config
-cd .config
-git clone https://github.com/chymian/dotfiles.git
-
-cd ~$USER
 chown -R $USER. .
-
+cd
 
 echo "Login as $USER and run crypto-vm/lib/customize.sh"
 
