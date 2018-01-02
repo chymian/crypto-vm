@@ -39,7 +39,7 @@ apt-get update
 
 # install grml-rescueboot
 cd /boot/grub/grml
-wget http://download.grml.org/grml64-full_2017.05.iso
+wget -N http://download.grml.org/grml64-full_2017.05.iso
 update-grub
 
 # sshd-keys
