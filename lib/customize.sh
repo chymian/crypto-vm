@@ -114,7 +114,7 @@ change_hddkey() {
 # needed programs & upgrade
 pkg_handling() {
 	echo "Installing dependencies & upgrade"
-	add-apt-repository ppa:x2go/stable
+	add-apt-repository -y ppa:x2go/stable
 	\apt-get update
 	\apt-get -y --force-yes install libboost-all-dev qtbase5-dev qtbase5-dev-tools nodejs-dev libcurl4-openssl-dev \
 		libdb++-dev libminiupnpc-dev libncurses5-dev libpthread-stubs0-dev libprotobuf-dev libssl-dev \

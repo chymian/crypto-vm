@@ -10,7 +10,7 @@ ALL_WALLETS="ORE XVG"
 
 # prepare system
 prepare_system() {
-	sudo add-apt-repository ppa:bitcoin/bitcoin
+	sudo add-apt-repository -y ppa:bitcoin/bitcoin
 	sudo \apt-get update
 	sudo \apt-get install -y --force-yes build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils \
 		libdb4.8-dev libdb4.8++-dev libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev \
