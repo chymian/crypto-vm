@@ -114,10 +114,11 @@ change_hddkey() {
 # needed programs & upgrade
 pkg_handling() {
 	echo "Installing dependencies & upgrade"
+	add-apt-repository ppa:x2go/stable
 	\apt-get update
 	\apt-get -y --force-yes install libboost-all-dev qtbase5-dev qtbase5-dev-tools nodejs-dev libcurl4-openssl-dev \
 		libdb++-dev libminiupnpc-dev libncurses5-dev libpthread-stubs0-dev libprotobuf-dev libssl-dev \
-		libstdc++-4.8-dev build-essential zlib1g zlib1g-dev tasksel
+		libstdc++-4.8-dev build-essential zlib1g zlib1g-dev tasksel x2goserver x2goserver-xsession
 	\apt-get full-upgrade --yes --force-yes
 }
 
