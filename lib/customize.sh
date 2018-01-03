@@ -14,7 +14,7 @@ DEBIAN_FRONTEND=noninteractive
 # check if we re root
 [ -w /etc/shadow ] || {
 	echo restart $0 as root
-	exec sudo ./$0
+	exec sudo ./$0 $*
 	exit 1
 }
 
@@ -114,11 +114,11 @@ change_hddkey() {
 # needed programs & upgrade
 pkg_handling() {
 	echo "Installing dependencies & upgrade"
-	\apt-get update 2> /dev/null
+	\apt-get update
 	\apt-get -y --force-yes install libboost-all-dev qtbase5-dev qtbase5-dev-tools nodejs-dev libcurl4-openssl-dev \
 		libdb++-dev libminiupnpc-dev libncurses5-dev libpthread-stubs0-dev libprotobuf-dev libssl-dev \
-		libstdc++-4.8-dev build-essential zlib1g zlib1g-dev tasksel 2> /dev/null
-	\apt-get full-upgrade --yes --force-yes 2> /dev/null
+		libstdc++-4.8-dev build-essential zlib1g zlib1g-dev tasksel
+	\apt-get full-upgrade --yes --force-yes
 }
 
 # Main
@@ -176,5 +176,8 @@ change_hddkey $KEY
 
 # finally, update the system
 pkg_handling
+
+# remove motd-msg.
+rm /etc/update-motd.d/99-crypto-vm_show_once
 
 exit 0

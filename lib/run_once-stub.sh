@@ -89,10 +89,15 @@ git clone https://github.com/chymian/crypto-vm.git
 chown -R $USER. .
 cd
 
-echo "Login as $USER and run crypto-vm/lib/customize.sh"
+# manage motd
+cd /etc/update-motd.d
+for i in  10-help-text ; do
+	mv $i .$i
+done
+echo "Login as $USER and run crypto-vm/lib/customize.sh" > 99-crypto-vm_show_once
 
 rm $NOT_EXECUTED
 rm /root/.ssh/*
 rm /root/.bash_history
-
+reboot -f
 exit 0
