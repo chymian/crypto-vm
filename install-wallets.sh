@@ -6,7 +6,7 @@ DEBIAN_FRONTEND=noninteractive
 PREPARED_MARKER=$HOME/.install_wallets_prepared
 
 # blank separated list of supported Coins
-ALL_WALLETS="ORE XVG"
+ALL_WALLETS="ORE ALTCOM"
 
 # prepare system
 prepare_system() {

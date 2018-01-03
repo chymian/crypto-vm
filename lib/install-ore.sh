@@ -23,16 +23,15 @@ if [ -d $BASE_NAME ]; then
     git pull
 else
     git clone $GIT
+    cd $BASE_NAME
 fi
 
-cd $BASE_NAME
 
 ./autogen.sh
 ./configure --prefix=/opt/$BASE_NAME
-make
-#sudo make install 
+make -j8
+sudo make install 
 
-exit 0
 # create desktop file
 cat << EOF > $COIN_NAME.desktop
 
@@ -51,5 +50,5 @@ Type=Application
 MimeType=x-scheme-handler/$COIN_NAME;
 EOF
 
-sudo desktop-file-install $COIN_NAME.desktop
+sudo cp $COIN_NAME.desktop /usr/share/applications/
 
