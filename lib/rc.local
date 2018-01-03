@@ -1,0 +1,24 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+if [ -f /root/run_once.sh ]; then
+	if [ -f /root/.run_once_not_yet ]; then
+		logger executing /root/run_once.sh
+		bash /root/run_once.sh
+	else
+		logger not executing /root/run_once.sh: did already run
+	fi
+fi
+
+exit 0
+
